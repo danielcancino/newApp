@@ -1,0 +1,91 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>
+            Configuración de la Impresora
+        </ion-title>
+        <ion-buttons start>
+            <button ion-button (click)="dismiss()">
+                <span ion-text color="primary" showWhen="ios">Cancelar</span>
+                <ion-icon name="md-close" showWhen="android, windows"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+
+    <ion-list class="radio-list-2" radio-group [(ngModel)]="selecteddevice" *ngIf="dispositivos.length>0">
+        <ion-list-header>
+            <h1>Seleccione una impresora a continuación:</h1>
+        </ion-list-header>
+
+        <ion-item *ngFor="let d of dispositivos; let i=index">
+            <ion-label>
+                <h2>{{d.name}}</h2>
+                <p>{{d.address}}</p>
+            </ion-label>
+            <ion-radio [value]="d"></ion-radio>
+        </ion-item>
+
+    </ion-list>
+
+    <ion-list class="radio-list-2" *ngIf="dispositivos.length===0">
+        <ion-list-header>
+            <h1>No se han encontrado dispositivos, verifique su conexión BlueTooth</h1>
+        </ion-list-header>
+    </ion-list>
+
+    <ion-list class="fixed-list-2" no-border *ngIf="dispositivos.length>0">
+        <ion-row>
+            <ion-col col-sm-6>
+                <ion-item>
+                    <ion-label stacked>
+                        Ajuste Lateral
+                    </ion-label>
+                    <ion-input [(ngModel)]="ajustes.lateral" name="lateral" type="number"
+                               placeholder="Ajuste Lateral"></ion-input>
+                </ion-item>
+            </ion-col>
+            <ion-col col-sm-6>
+                <ion-item>
+                    <ion-label stacked>
+                        Ajuste Superior
+                    </ion-label>
+                    <ion-input [(ngModel)]="ajustes.superior" name="superior" type="number"
+                               placeholder="Ajuste Superior"></ion-input>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+    </ion-list>
+
+
+    <ion-list class="btn-cerrar" *ngIf="dispositivos.length>0">
+        <!--<ion-item color="danger"  (click)="close()" text-center>-->
+        <!--Cerrar Sesión-->
+        <!--</ion-item>-->
+        <ion-item no-border>
+            <ion-row>
+                <button color="celeste" class="add-btn" (click)="testPrint()" ion-button block
+                        [disabled]="selecteddevice==null">
+                    <ion-icon ios="ios-print" md="ios-print" item-start></ion-icon>
+                    Probar Impresora
+                </button>
+            </ion-row>
+        </ion-item>
+
+        <ion-item no-border>
+            <ion-row>
+                <button color="danger" class="add-btn" (click)="save()" ion-button block [disabled]="!status ||
+                ajustes.lateral == '' || ajustes.superior == ''">
+                    <ion-icon ios="ios-add-circle" md="ios-add-circle" item-start></ion-icon>
+                    Guardar Configuraión
+                </button>
+            </ion-row>
+        </ion-item>
+
+    </ion-list>
+</ion-content>

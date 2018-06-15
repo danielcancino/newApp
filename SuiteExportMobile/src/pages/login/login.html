@@ -1,0 +1,42 @@
+<ion-content padding="true" scroll="false">
+    <div padding class="content">
+        <ion-row>
+            <ion-col>
+                <img [@flyInBottomSlow]="logoState" src="../../assets/imgs/logo.svg"/>
+            </ion-col>
+        </ion-row>
+
+
+        <form (ngSubmit)="login()" #registerForm="ngForm">
+            <ion-row>
+                <ion-col>
+                    <ion-list inset [@bounceInBottom]="formState">
+                        <ion-item>
+                            <ion-input [(ngModel)]="loginData.email" name="email" type="text"
+                                       placeholder="Cuenta de Correo"></ion-input>
+                        </ion-item>
+
+                        <ion-item>
+                            <ion-input [(ngModel)]="loginData.password" name="password" type="password"
+                                       placeholder="Contraseña"></ion-input>
+                        </ion-item>
+
+                    </ion-list>
+                </ion-col>
+            </ion-row>
+
+            <ion-row>
+                <ion-col class="col-btn-login">
+                    <button ion-button class="login-button" type="submit" [@fadeIn]="loginState">Acceder</button>
+                </ion-col>
+            </ion-row>
+
+
+        </form>
+    </div>
+
+
+    <footer class="footer">
+        © IFK Soluciones Informáticas
+    </footer>
+</ion-content>

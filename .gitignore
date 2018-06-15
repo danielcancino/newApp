@@ -1,0 +1,11 @@
+.idea/
+SuiteExportMobile/dist/
+SuiteExportMobile/node_modules/
+SuiteExportMobile/hooks/
+SuiteExportMobile/platforms/
+SuiteExportMobile/plugins/cordova*
+
+SuiteExportMobile/plugins/ios.json
+SuiteExportMobile/www/
+SuiteExportMobile/.sourcemaps/
+SuiteExportMobile/package-lock.json

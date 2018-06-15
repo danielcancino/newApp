@@ -1,0 +1,64 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>
+            Perfil
+        </ion-title>
+        <ion-buttons start>
+            <button ion-button (click)="dismiss()">
+                <span ion-text color="primary" showWhen="ios">Cancelar</span>
+                <ion-icon name="md-close" showWhen="android, windows"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+    <ion-list class="fixed-list-2">
+        <ion-item>
+            <ion-thumbnail item-start>
+                <div class="imguser" [style.background-image]="data.imagen"></div>
+            </ion-thumbnail>
+            <p>{{data.user}}</p>
+            <h2>• {{data.email}}</h2>
+            <h2>• {{data.profile_name}}</h2>
+        </ion-item>
+        <ion-item>
+            <h2>Empresa:</h2>
+            <p>{{data.empresa}}</p>
+        </ion-item>
+
+        <ion-item>
+            <h2>Temporada:</h2>
+            <p>{{data.temporada}}</p>
+        </ion-item>
+
+        <ion-item>
+            <h2>Bodega:</h2>
+            <p>{{data.bodega}}</p>
+        </ion-item>
+
+        <ion-item>
+            <h2>Impresora:</h2>
+            <p>{{data.impresora_name}} <small>({{data.impresora_mac}})</small></p>
+            <ion-icon name="more" item-end (click)="configurarImpresora()"></ion-icon>
+        </ion-item>
+        <br>
+    </ion-list>
+
+
+    <ion-list class="btn-cerrar">
+        <!--<ion-item color="danger"  (click)="close()" text-center>-->
+        <!--Cerrar Sesión-->
+        <!--</ion-item>-->
+        <ion-item>
+            <ion-row>
+                <button color="danger" class="add-btn" (click)="close()" ion-button block>
+                    <ion-icon ios="ios-power" md="md-power" item-start></ion-icon>
+                    Cerrar Sesión
+                </button>
+            </ion-row>
+        </ion-item>
+
+    </ion-list>
+</ion-content>

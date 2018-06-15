@@ -1,0 +1,51 @@
+<ion-header>
+    <ion-navbar>
+        <ion-buttons start (click)="dashboard()">
+            <button ion-button icon-only color="white">
+                <ion-icon name="md-home"></ion-icon>
+            </button>
+        </ion-buttons>
+        <ion-title>
+            Recepción Materia Prima
+        </ion-title>
+        <ion-buttons end (click)="profileUser()">
+            <button ion-button icon-only color="white">
+                <ion-icon name="md-person"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content >
+    <ion-row padding>
+        <button color="celeste" class="add-btn" (click)="open_add()" ion-button block>Agregar</button>
+    </ion-row>
+    <ion-scroll padding scrollY="true" style="    height: calc(100% - 90px);">
+        <ion-list class="main-table">
+            <ion-item *ngFor="let recepcion of data.oTable">
+                <!--<ion-row>-->
+                    <h2>Predio</h2>
+                    <h3>{{recepcion.cod_predio}} - <b>{{recepcion.desc_predio}}</b></h3>
+                <!--</ion-row>-->
+                <ion-row class="second">
+                    <ion-col>
+                        <h3>Guía</h3>
+                        <h2>{{recepcion.guia}}</h2>
+                    </ion-col>
+                    <ion-col>
+                        <h3>Especie</h3>
+                        <h2>{{recepcion.especie}}</h2>
+                    </ion-col>
+                    <ion-col>
+                        <h3>Recepción</h3>
+                        <h2>{{recepcion.fecha_recepcion}}</h2>
+                    </ion-col>
+
+                    <div>
+                    <button ion-button item-end small color="celeste" (click)="openMenu(recepcion)"><ion-icon name="ios-arrow-down"></ion-icon></button>
+                    </div>
+                </ion-row>
+            </ion-item>
+        </ion-list>
+    </ion-scroll>
+</ion-content>

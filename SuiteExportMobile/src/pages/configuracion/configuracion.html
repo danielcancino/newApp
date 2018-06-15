@@ -1,0 +1,56 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>
+            Configuración
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-list class="fixed-list-1">
+
+        <ion-item>
+            <ion-select end item-end [(ngModel)]="confdata.idempresa" name="idempresa" block (ionChange)="parseTyB()"
+                        placeholder="Empresa">
+                <ion-option *ngFor="let emp of empresas" [value]="emp.idempresa">
+                    {{emp.razon_social}}
+                </ion-option>
+            </ion-select>
+            <ion-label>
+                Empresa:
+            </ion-label>
+        </ion-item>
+
+        <ion-item>
+            <ion-select end item-end [(ngModel)]="confdata.idtemporada" name="idtemporada" block
+                        placeholder="Temporada">
+                <ion-option *ngFor="let temp of temporadas" [value]="temp.idtemporada">
+                    {{temp.temporada}}
+                </ion-option>
+            </ion-select>
+
+            <ion-label>Temporada:</ion-label>
+        </ion-item>
+
+        <ion-item>
+            <ion-select end item-end [(ngModel)]="confdata.idbodega" name="idbodega" block
+                        placeholder="Bodega">
+                <ion-option *ngFor="let bod of bodegas" [value]="bod.idbodega">
+                    {{bod.cod_bodega}} - {{bod.descripcion}}
+                </ion-option>
+            </ion-select>
+
+            <ion-label>Bodega:</ion-label>
+        </ion-item>
+
+    </ion-list>
+
+    <div padding>
+        <button ion-button color="primary" block (click)="accept()" margin-bottom
+                [disabled]="confdata.idempresa=='' || confdata.idbodega == '' || confdata.idtemporada == ''">Aceptar
+        </button>
+        <button ion-button color="danger" block (click)="close()">Cancelar</button>
+    </div>
+
+
+</ion-content>

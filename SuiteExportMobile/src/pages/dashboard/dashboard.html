@@ -1,0 +1,32 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>
+            Dashboard
+        </ion-title>
+        <ion-buttons start>
+            <button ion-button (click)="dismiss()">
+                <span ion-text color="primary" showWhen="ios">Cancelar</span>
+                <ion-icon name="md-close" showWhen="android, windows"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+    <ion-item>
+        <ion-icon name="cloud-download"  item-start></ion-icon>
+        <h3>Obtener Datos</h3>
+        <p>Descargar los datos desde el servidor</p>
+        <button ion-button color="celeste" (click)="download()" block>Descargar Sincronización</button>
+    </ion-item>
+    <p></p>
+    <ion-item>
+        <ion-icon name="cloud-upload" item-start></ion-icon>
+        <h3>Enviar Datos</h3>
+        <p>Enviar los datos del dispositivo hacia el servidor. </p>
+        <button ion-button color="celeste" (click)="upload()" block>Enviar Sincronización</button>
+    </ion-item>
+    <p></p>
+</ion-content>
+

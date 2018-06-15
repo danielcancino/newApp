@@ -1,0 +1,150 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>
+            Agregar
+        </ion-title>
+        <ion-buttons start>
+            <button ion-button (click)="dismiss()">
+                <span ion-text color="primary" showWhen="ios">Cancelar</span>
+                <ion-icon name="md-close" showWhen="android, windows"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <form class="agregar-form" [formGroup]="form" (submit)="onSubmit()">
+        <ion-list class="fixed-list-2" no-border>
+            <ion-row>
+                <ion-col col-sm-6 col-12 col-lg-12>
+                    <ion-item>
+                        <ion-label stacked><b>Predio</b></ion-label>
+                        <ion-select end item-end [(ngModel)]="form.idpredio" formControlName="idpredio" type="text"
+                                    placeholder="Predio">
+                            <ion-option *ngFor="let dat of data.predios" [value]="dat.idpredio">
+                                {{dat.cod_predio}} - {{dat.descripcion}}
+                            </ion-option>
+                        </ion-select>
+                    </ion-item>
+                </ion-col>
+                <ion-col col-sm-6 col-12 col-lg-12>
+                    <ion-item>
+                        <ion-label stacked><b>Guía</b></ion-label>
+                        <ion-input [(ngModel)]="form.guia" formControlName="guia" type="text"
+                                   placeholder="Guia"></ion-input>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+
+            <ion-row>
+                <ion-col col-sm-6 col-12 col-lg-12>
+                    <ion-item>
+                        <ion-label stacked><b>Especie</b></ion-label>
+                        <ion-select end item-end [(ngModel)]="form.idespecie" formControlName="idespecie" type="text"
+                                    placeholder="Especie">
+                            <ion-option *ngFor="let esp of data.especies" [value]="esp.idespecie">
+                                {{esp.cod_especie}} - {{esp.descripcion}}
+                            </ion-option>
+                        </ion-select>
+                    </ion-item>
+                </ion-col>
+                <ion-col col-sm-6 col-12 col-lg-12>
+                    <ion-item>
+                        <ion-label stacked><b>Fecha Guía Despacho</b></ion-label>
+                        <ion-datetime displayFormat="DD/MM/YYYY" min="2016" max="2020-10-31"
+                                      [(ngModel)]="form.fecha_guia_despacho" placeholder="Fecha Guía Despacho"
+                                      formControlName="fecha_guia_despacho">
+                        </ion-datetime>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col col-sm-6 col-12 col-lg-12>
+                    <ion-item>
+                        <ion-label stacked><b>Fecha Recepción</b></ion-label>
+                        <ion-datetime [(ngModel)]="form.fecha_recepcion" displayFormat="DD/MM/YYYY" min="2016"
+                                      max="2020-10-31" formControlName="fecha_recepcion" type="text"
+                                      placeholder="Fecha Recepción">
+                        </ion-datetime>
+                    </ion-item>
+                </ion-col>
+                <ion-col col-sm-6 col-12 col-lg-12>
+                    <ion-item>
+                        <ion-label stacked><b>Hora Recepción</b></ion-label>
+                        <ion-datetime [(ngModel)]="form.hora_recepcion" displayFormat="HH:mm A"
+                                      formControlName="hora_recepcion" type="text"
+                                      placeholder="Hora Recepción"></ion-datetime>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col col-sm-6 col-12 col-lg-12>
+                    <ion-item>
+                        <ion-label stacked><b>Transporte</b></ion-label>
+                        <ion-select end item-end [(ngModel)]="form.identidad_transporte"
+                                    formControlName="identidad_transporte" type="text"
+                                    placeholder="Transporte">
+                            <ion-option *ngFor="let transp of data.transportes" [value]="transp.identidad">
+                                {{transp.codigo_entidad}} - {{transp.nombre}}
+                            </ion-option>
+                        </ion-select>
+                    </ion-item>
+                </ion-col>
+                <ion-col col-sm-6 col-12 col-lg-12>
+                    <ion-item>
+                        <ion-label stacked><b>Chofer</b></ion-label>
+                        <ion-input [(ngModel)]="form.chofer" formControlName="chofer" type="text"
+                                   placeholder="Chofer"></ion-input>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col col-sm-6 col-12 col-lg-12>
+                    <ion-item>
+                        <ion-label stacked><b>Camión</b></ion-label>
+                        <ion-input [(ngModel)]="form.camion" formControlName="camion" type="text"
+                                   placeholder="Camión"></ion-input>
+                    </ion-item>
+                </ion-col>
+                <ion-col col-sm-6 col-12 col-lg-12>
+                    <ion-item>
+                        <ion-label stacked><b>Patente carro</b></ion-label>
+                        <ion-input [(ngModel)]="form.patente_carro" formControlName="patente_carro" type="text"
+                                   placeholder="Patente Carro"></ion-input>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col col-sm-12 col-12 col-lg-12>
+                    <ion-item>
+                        <ion-label stacked><b>observaciones</b></ion-label>
+                        <ion-input [(ngModel)]="form.observacion" formControlName="observacion" type="text"
+                                   placeholder="Observaciones"></ion-input>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+        </ion-list>
+
+
+        <ion-list class="fixed-buttons-1">
+            <ion-grid>
+                <ion-row>
+                    <ion-col col-6>
+                        <button ion-button full   *ngIf="(data.idrecepcion!=null);" type="submit" (click)="handlerNext(false)">
+                            GUARDAR
+                        </button>
+                    </ion-col>
+                    <!-- Float the icon right -->
+                    <ion-col col-6>
+                        <button ion-button full color-orange icon-right type="submit" (click)="handlerNext(true)">
+                            SIGUIENTE
+                            <ion-icon name="arrow-forward"></ion-icon>
+                        </button>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+
+        </ion-list>
+    </form>
+    <!--<div>{{form.value|json}}</div>-->
+</ion-content>

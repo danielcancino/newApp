@@ -1,0 +1,232 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>
+            Agregar
+        </ion-title>
+        <ion-buttons start>
+            <button ion-button (click)="dismiss()">
+                <span ion-text color="primary" showWhen="ios">Cancelar</span>
+                <ion-icon ios="ios-arrow-back" md="md-arrow-back"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <form class="detail-form" [formGroup]="form" (submit)="onSubmit()">
+        <ion-list class="fixed-list-2" no-border>
+            <ion-grid class="button-group">
+                <ion-row>
+                    <ion-col>
+                        <button ion-button small block color="primary">Productos</button>
+                    </ion-col>
+                    <ion-col>
+                        <button ion-button small block color="secondary">Envases</button>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+
+            <ion-row>
+                <ion-col col-sm-6 col-12 col-lg-12>
+                    <ion-item>
+                        <ion-label stacked><b>Nº DE LOTE</b></ion-label>
+                        <ion-input [(ngModel)]="form.lote" formControlName="lote" type="text"  readonly="true"
+                                   placeholder="Lote"></ion-input>
+                    </ion-item>
+                </ion-col>
+                <ion-col col-sm-6 col-12 col-lg-12>
+                    <ion-item>
+                        <ion-label stacked><b>PRODUCTO</b></ion-label>
+                        <ion-select end item-end [(ngModel)]="form.idarticulo" formControlName="idarticulo" type="text"
+                                    placeholder="seleccione producto">
+                            <ion-option *ngFor="let dat of data.productos" [value]="dat.idarticulo">
+                                {{dat.cod_articulo}} - {{dat.descripcion}}
+                            </ion-option>
+                        </ion-select>
+                    </ion-item>
+
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col col-sm-6 col-12 col-lg-12>
+                    <ion-item>
+                        <ion-label stacked>CUARTEL</ion-label>
+                        <ion-select end item-end [(ngModel)]="form.idcuartel" formControlName="idcuartel" type="text"
+                                    (ionChange)="triggerCuartel(form.idcuartel)"
+                                    placeholder="seleccione cuartel">
+                            <ion-option *ngFor="let dat of data.cuarteles" [value]="dat.idcuartel">
+                                {{dat.descripcion}}
+                            </ion-option>
+                        </ion-select>
+                    </ion-item>
+                </ion-col>
+                <ion-col col-sm-6 col-12 col-lg-12>
+                    <ion-item>
+                        <ion-label stacked>VARIEDAD</ion-label>
+                        <ion-select end item-end [(ngModel)]="form.idvariedad" formControlName="idvariedad" type="text"
+                                    placeholder="seleccione variedad">
+                            <ion-option *ngFor="let dat of data.variedades" [value]="dat.idvariedad">
+                                {{dat.codigo}} - {{dat.variedad}}
+                            </ion-option>
+                        </ion-select>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col col-sm-6 col-12 col-lg-12>
+                    <ion-item>
+                        <ion-label stacked>CALIBRE</ion-label>
+                        <ion-select end item-end [(ngModel)]="form.idcalibre" formControlName="idcalibre" type="text"
+                                    placeholder="seleccione calibre">
+                            <ion-option *ngFor="let dat of data.calibres" [value]="dat.idcalibre">
+                                {{dat.cod_calibre}} - {{dat.descripcion}}
+                            </ion-option>
+                        </ion-select>
+                    </ion-item>
+                </ion-col>
+                <ion-col col-sm-6 col-12 col-lg-12>
+                    <ion-item>
+                        <ion-label stacked><b>FECHA COSECHA</b></ion-label>
+                        <ion-datetime displayFormat="DD/MM/YYYY" min="2016" max="2020-10-31"
+                                      [(ngModel)]="form.fecha_cosecha" formControlName="fecha_cosecha" type="text"
+                                      placeholder="FECHA COSECHA"></ion-datetime>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+
+            <ion-row>
+                <ion-col col-sm-6 col-12 col-lg-12>
+                    <ion-item>
+                        <ion-label stacked>ENVASE</ion-label>
+                        <ion-select end item-end [(ngModel)]="form.idarticulo_envase"
+                                    formControlName="idarticulo_envase" type="text"
+                                    placeholder="seleccione envase">
+                            <ion-option *ngFor="let dat of data.envases" [value]="dat.identidad">
+                                {{dat.cod_articulo}} - {{dat.descripcion}}
+                            </ion-option>
+                        </ion-select>
+                    </ion-item>
+                </ion-col>
+                <ion-col col-sm-6 col-12 col-lg-12>
+                    <ion-item>
+                        <ion-label stacked>ENVASE PALLET</ion-label>
+                        <ion-select end item-end [(ngModel)]="form.idarticulo_pallet"
+                                    formControlName="idarticulo_pallet" type="text"
+                                    placeholder="NO APLICA">
+                            <!--<ion-option value="0">NO APLICA</ion-option>-->
+                            <ion-option *ngFor="let dat of data.envases" [value]="dat.identidad">
+                                {{dat.cod_articulo}} - {{dat.descripcion}}
+                            </ion-option>
+                        </ion-select>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col col-sm-6>
+                    <ion-item>
+                        <ion-label stacked><b>CAJAS INFORMADAS</b></ion-label>
+                        <ion-input formControlName="cant_cajas_informadas" [(ngModel)]="form.cant_cajas_informadas"
+                                   type="number" placeholder="Cajas"></ion-input>
+                    </ion-item>
+                </ion-col>
+                <ion-col col-sm-6>
+                    <ion-item>
+                        <ion-label stacked><b>CAJAS</b></ion-label>
+                        <ion-input formControlName="cant_cajas" [(ngModel)]="form.cant_cajas" type="number"
+                                   placeholder="Cajas"></ion-input>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col col-sm-6>
+                    <ion-item>
+                        <ion-label stacked><b>KILOS INFORMADAS</b></ion-label>
+                        <ion-input formControlName="kilos_brutos_informados" [(ngModel)]="form.kilos_brutos_informados"
+                                   type="number" step="0.01" placeholder="K. INFORMADOS"></ion-input>
+                    </ion-item>
+                </ion-col>
+                <ion-col col-sm-6>
+                    <ion-item>
+                        <ion-label stacked><b>KILOS BRUTOS</b></ion-label>
+                        <ion-input formControlName="kilos_brutos" [(ngModel)]="form.kilos_brutos" type="number"
+                                   step="0.01" placeholder="K. BRUTOS"></ion-input>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col col-sm-6>
+                    <ion-item>
+                        <ion-label stacked><b>KILOS NETOS</b></ion-label>
+                        <ion-input formControlName="kilos_netos" [(ngModel)]="form.kilos_netos" type="number"
+                                   step="0.01" placeholder="K. NETOS"></ion-input>
+                    </ion-item>
+                </ion-col>
+                <ion-col col-sm-6>
+                    <ion-item>
+                        <ion-label stacked><b>TEMPERATURA</b></ion-label>
+                        <ion-input formControlName="temperatura" [(ngModel)]="form.temperatura" type="number"
+                                   placeholder="TEMP"></ion-input>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+        </ion-list>
+        <ion-list class="fixed-buttons-1">
+            <ion-grid>
+                <ion-row>
+                    <!-- Float the icon right -->
+                    <ion-col col-12>
+                        <button ion-button color="secondary" float-right type="submit">
+                            AGREGAR
+                        </button>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+
+        </ion-list>
+    </form>
+
+    <ion-scroll padding scrollY="true" style="    height: calc(100% - 90px);">
+        <ion-list class="main-table">
+            <ion-item-divider></ion-item-divider>
+            <ion-item *ngFor="let dat of  data.oTable">
+                <ion-row class="primary">
+                    <ion-col>
+                        <h3>TARJA</h3>
+                        <h2>{{dat.tarja}}</h2>
+                    </ion-col>
+                    <ion-col>
+                        <h3>COD PRODUCTO</h3>
+                        <h2>{{dat.cod_articulo}}</h2>
+                    </ion-col>
+                    <ion-col text-left><!--quitar text-left para btn-->
+                        <h3>VARIEDAD</h3>
+                        <h2>{{dat.variedad}}</h2>
+                    </ion-col>
+
+                </ion-row>
+                <ion-row class="second">
+                    <ion-col>
+                        <h3>CUARTEL</h3>
+                        <h2>{{dat.cuartel}}</h2>
+                    </ion-col>
+                    <ion-col>
+                        <h3>CAJAS</h3>
+                        <h2>{{dat.cajas}}</h2>
+                    </ion-col>
+                    <ion-col>
+                        <h3>KILOS NETOS</h3>
+                        <h2>{{dat.kilos_netos}}</h2>
+                    </ion-col>
+                    <ion-col>
+                        <button  ion-button item-end small color="danger" (click)="quitar(dat.idrecepcion_detalle)">
+                            <ion-icon name="close-circle"></ion-icon>
+                        </button>
+                        <!--<button ion-button item-end small color="celeste" (click)="editar(dat.idrecepcion_detalle)">-->
+                            <!--<ion-icon name="create"></ion-icon>-->
+                        <!--</button>-->
+                    </ion-col>
+                </ion-row>
+            </ion-item>
+        </ion-list>
+    </ion-scroll>
+</ion-content>
